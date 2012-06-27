@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, GameCollectorActivity!</string>
+    <string name="app_name">Game Collector</string>
+    <string name="tab_console_description">Console Description</string>
+    <string name="tab_games">Games</string>
+    <string name="tab_games_description">Games Description</string>
+
+</resources>
