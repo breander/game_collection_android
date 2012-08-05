@@ -31,7 +31,7 @@ public class ConsoleListFragment extends android.app.ListFragment implements OnS
 	ArrayAdapter<String> adapter; 
 	int offset = 0;
 	boolean loading = false;
-	int limit = 20;
+	int limit = 100;
 	String APIKEY = "?api_key=90fbab5cb7aa63ea95938c3a39f19d2049308e40";
 	String Website = "http://api.giantbomb.com";
 	boolean mDualPane;
@@ -162,7 +162,7 @@ public class ConsoleListFragment extends android.app.ListFragment implements OnS
 		{
 			loading = true;
 			DownloadWebPageTask task = new DownloadWebPageTask();
-			task.execute(new String[] { Website + "/platforms/" + APIKEY + "&offset=" + offset + "&limit=" + limit + "&format=xml" });
+			task.execute(new String[] { Website + "/platforms/" + APIKEY + "&field_list=name,id&offset=" + offset + "&limit=" + limit + "&format=xml" });
 			offset += limit;
 		}
 		

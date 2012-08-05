@@ -29,7 +29,7 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 	ArrayAdapter<String> adapter; 
 	int offset = 0;
 	boolean loading = false;
-	int limit = 20;
+	int limit = 100;
 	String APIKEY = "?api_key=90fbab5cb7aa63ea95938c3a39f19d2049308e40";
 	String Website = "http://api.giantbomb.com";
 	String PlatformId = "0";
@@ -74,7 +74,7 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 		{
 			loading = true;
 			DownloadWebPageTask task = new DownloadWebPageTask();
-			task.execute(new String[] { Website + "/games/" + APIKEY + "&platforms=" + PlatformId + "&sort=name&offset=" + offset + "&limit=" + limit + "&format=xml" });
+			task.execute(new String[] { Website + "/games/" + APIKEY + "&field_list=name,id&platforms=" + PlatformId + "&sort=name&offset=" + offset + "&limit=" + limit + "&format=xml" });
 			offset += limit;
 		}
 	}
