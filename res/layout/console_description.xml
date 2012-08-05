@@ -11,7 +11,7 @@
        android:layout_marginTop="20dip"
        android:textAppearance="?android:attr/textAppearanceLarge"
        android:textSize="30dip" />
-   <TextView
+   <WebView
 		android:id="@+id/descriptionText"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
