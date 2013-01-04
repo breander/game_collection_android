@@ -32,7 +32,7 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 	int limit = 100;
 	//String APIKEY = "?api_key=90fbab5cb7aa63ea95938c3a39f19d2049308e40";
 	//String Website = "http://api.giantbomb.com";
-	String PlatformId = "0";
+	String PlatformId = "";
 	
 	GameListFragment(){
 		
@@ -42,7 +42,7 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 		_platform = platform;
 		
 		if(_platform != null){
-			PlatformId = _platform.name;
+			PlatformId = _platform.name.replace(' ', '+');
 		}
 	}
 	
@@ -72,7 +72,7 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
 		// TODO Auto-generated method stub
-		boolean loadMore = firstVisibleItem + visibleItemCount >= totalItemCount;
+		//boolean loadMore = firstVisibleItem + visibleItemCount >= totalItemCount;
 		
 		//if(loadMore && !loading)
 		//{
