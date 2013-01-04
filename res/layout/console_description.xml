@@ -3,20 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-	<TextView
-       android:id="@+id/detailsText"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_gravity="center_horizontal|center_vertical"
-       android:layout_marginTop="20dip"
-       android:textAppearance="?android:attr/textAppearanceLarge"
-       android:textSize="30dip" />
-   <WebView
-		android:id="@+id/descriptionText"
-		android:layout_width="wrap_content"
-		android:layout_height="match_parent"
-		android:layout_gravity="center_horizontal|center_vertical"
-		android:layout_marginTop="20dip"
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:textSize="30dip" />
+
+    <TextView
+        android:id="@+id/headerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp" />
+    
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp" />
+    
 </LinearLayout>

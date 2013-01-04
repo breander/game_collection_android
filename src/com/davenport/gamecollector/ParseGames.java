@@ -71,8 +71,8 @@ private List<game> elements;
 		if(qName.equalsIgnoreCase("game")) {
 			//add it to the list
 			elements.add(element);
-		}else if (qName.equalsIgnoreCase("name")) {
-			element.name = tempVal.toString();
+		}else if (qName.equalsIgnoreCase("GameTitle")) {
+			element.GameTitle = tempVal.toString();
 		}else if (qName.equalsIgnoreCase("id")) {
 			element.name = tempVal.toString();
 		}

@@ -46,7 +46,7 @@ public class ConsoleDescriptionFragment extends Fragment implements LoaderCallba
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		TextView title = (TextView) getView().findViewById(R.id.detailsText);
+		TextView title = (TextView) getView().findViewById(R.id.headerText);
 		if(title != null)
 		{
 			if(_platform != null){
@@ -60,7 +60,8 @@ public class ConsoleDescriptionFragment extends Fragment implements LoaderCallba
 		}
 		
 		DownloadWebPageTask task = new DownloadWebPageTask();
-		task.execute(new String[] { Website + "/platform/" + _platform.id + "/" + APIKEY + "&field_list=description&format=xml" });
+		//task.execute(new String[] { Website + "/platform/" + _platform.id + "/" + APIKEY + "&field_list=description&format=xml" });
+		task.execute(new String[] { "http://thegamesdb.net/api/GetPlatform.php?id=" + _platform.id });
 	}
 
 	@Override
@@ -119,60 +120,53 @@ public class ConsoleDescriptionFragment extends Fragment implements LoaderCallba
 		@Override
 		protected void onPostExecute(String result) {
 			
-			WebView desc = (WebView) getView().findViewById(R.id.descriptionText);
-			if(desc != null)
-			{
-				if(_platform != null)
-				{
+			//WebView desc = (WebView) getView().findViewById(R.id.descriptionText);
+			//if(desc != null)
+			//{
+				//if(_platform != null)
+				//{
 					//result = result.replace("OK1110","W");
-					
-					
 					
 					//Spanned marked_up = Html.fromHtml(result);
 					//desc.setMovementMethod(new ScrollingMovementMethod());
-					desc.setBackgroundColor(Color.BLACK);
-					desc.scrollTo(0, 0);
-					desc.loadData(result, "text/html", null);
+					//desc.setBackgroundColor(Color.BLACK);
+					//desc.scrollTo(0, 0);
+					//desc.loadData(result, "text/html", null);
 					//desc.setText(marked_up);
 					//desc.setText(result);
 					//desc.setBackgroundColor(Color.parseColor("#000000"));
 					//desc.setBackgroundColor(Color.GRAY);
-					desc.setFocusableInTouchMode(false);
-					desc.setFocusable(false);
+					//desc.setFocusableInTouchMode(false);
+					//desc.setFocusable(false);
 					
-				}
-				else
-				{
-					//desc.setText("Null");
-				}
-			}
-			return;
-			
-			//ParsePlatforms sp = new ParsePlatforms(result);
-			//sp.parseDocument();
-
-			//for(Platform plat : sp.ReturnList()){
-
-				//if(plat == null)
+				//}
+				//else
 				//{
-					//TextView desc = (TextView) getView().findViewById(R.id.descriptionText);
-					//if(desc != null)
-					//{
-						//if(_platform != null)
-						//{
-							//Spanned marked_up = Html.fromHtml(plat.description);
-							//desc.setMovementMethod(new ScrollingMovementMethod());
-							//desc.scrollTo(0, 0);
-							//desc.setText(marked_up);
-						//}
-						//else
-						//{
-							//desc.setText("Null");
-						//}
-					//}
-					//break;
+					//desc.setText("Null");
 				//}
 			//}
+			//return;
+			
+			ParsePlatform sp = new ParsePlatform(result);
+			sp.parseDocument();
+
+			Platform plat = sp.Return();
+
+			if(plat != null)
+			{
+				TextView desc = (TextView) getView().findViewById(R.id.descriptionText);
+				
+				if(desc != null)
+				{
+					Spanned marked_up = Html.fromHtml(plat.overview);
+					desc.setMovementMethod(new ScrollingMovementMethod());
+					//desc.scrollTo(0, 0);
+					desc.setText(marked_up);
+					//if(plat.overview != null)
+					//	desc.setText(plat.overview);
+					//desc.setText(result);
+				}
+			}
 		}
 	}
 }

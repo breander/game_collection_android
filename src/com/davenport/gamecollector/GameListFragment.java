@@ -30,8 +30,8 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 	int offset = 0;
 	boolean loading = false;
 	int limit = 100;
-	String APIKEY = "?api_key=90fbab5cb7aa63ea95938c3a39f19d2049308e40";
-	String Website = "http://api.giantbomb.com";
+	//String APIKEY = "?api_key=90fbab5cb7aa63ea95938c3a39f19d2049308e40";
+	//String Website = "http://api.giantbomb.com";
 	String PlatformId = "0";
 	
 	GameListFragment(){
@@ -42,7 +42,7 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 		_platform = platform;
 		
 		if(_platform != null){
-			PlatformId = _platform.id;
+			PlatformId = _platform.name;
 		}
 	}
 	
@@ -56,6 +56,10 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 		super.onActivityCreated(savedInstanceState);
 		GridView gridview = (GridView) getView().findViewById(R.id.gridView1);
 		gridview.setOnScrollListener(this);
+		
+		DownloadWebPageTask task = new DownloadWebPageTask();
+		task.execute(new String[] { "http://thegamesdb.net/api/PlatformGames.php?platform=" + PlatformId });
+		
 	}
 
 	@Override
@@ -70,13 +74,13 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 		// TODO Auto-generated method stub
 		boolean loadMore = firstVisibleItem + visibleItemCount >= totalItemCount;
 		
-		if(loadMore && !loading)
-		{
-			loading = true;
-			DownloadWebPageTask task = new DownloadWebPageTask();
-			task.execute(new String[] { Website + "/games/" + APIKEY + "&field_list=name,id&platforms=" + PlatformId + "&sort=name&offset=" + offset + "&limit=" + limit + "&format=xml" });
-			offset += limit;
-		}
+		//if(loadMore && !loading)
+		//{
+		//	loading = true;
+		//	DownloadWebPageTask task = new DownloadWebPageTask();
+		//	task.execute(new String[] { Website + "/games/" + APIKEY + "&field_list=name,id&platforms=" + PlatformId + "&sort=name&offset=" + offset + "&limit=" + limit + "&format=xml" });
+		//	offset += limit;
+		//}
 	}
 
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -123,9 +127,9 @@ public class GameListFragment extends Fragment implements OnScrollListener {
 			
 			for(game gm : sp.ReturnList()){
 				
-				if(gm.name != "")
+				if(gm.GameTitle != "")
 				{
-					String name = gm.name;
+					String name = gm.GameTitle;
 					names.add(name);
 				}
 			}

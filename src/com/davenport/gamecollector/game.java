@@ -44,6 +44,8 @@ public class game {
 	public String themes;
 	public String videos;
 	
+	public String GameTitle;
+	
 	game(){
 		
 	}

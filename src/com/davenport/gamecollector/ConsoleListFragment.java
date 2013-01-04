@@ -29,11 +29,11 @@ public class ConsoleListFragment extends android.app.ListFragment implements OnS
 	List<Platform> lstPlatforms = new ArrayList<Platform>();
 	List<String> names = new ArrayList<String>();
 	ArrayAdapter<String> adapter; 
-	int offset = 0;
-	boolean loading = false;
-	int limit = 100;
-	String APIKEY = "?api_key=90fbab5cb7aa63ea95938c3a39f19d2049308e40";
-	String Website = "http://api.giantbomb.com";
+	//int offset = 0;
+	//boolean loading = false;
+	//int limit = 100;
+	//String APIKEY = "?api_key=90fbab5cb7aa63ea95938c3a39f19d2049308e40";
+	//String Website = "http://api.giantbomb.com";
 	boolean mDualPane;
 	int mCurCheckPosition = 0;
 	
@@ -44,9 +44,16 @@ public class ConsoleListFragment extends android.app.ListFragment implements OnS
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
+		
 		super.onActivityCreated(savedInstanceState);
+		
 		getListView().setOnScrollListener(this);
+		
 		View detailsFrame = getActivity().findViewById(R.id.details);
+		
+		DownloadWebPageTask task = new DownloadWebPageTask();
+		task.execute(new String[] { "http://thegamesdb.net/api/GetPlatformsList.php" });
+		
 		mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 		
 		if(savedInstanceState != null) {
@@ -143,12 +150,12 @@ public class ConsoleListFragment extends android.app.ListFragment implements OnS
 				adapter = new ArrayAdapter<String>(getActivity(),
 						android.R.layout.simple_list_item_1, names);
 				setListAdapter(adapter);
-				loading = false;
+				//loading = false;
 			}
 			else
 			{
 				adapter.addAll(names);
-				loading = false;
+				//loading = false;
 			}
 		}
 	}
@@ -156,15 +163,16 @@ public class ConsoleListFragment extends android.app.ListFragment implements OnS
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
 		// TODO Auto-generated method stub
-		boolean loadMore = firstVisibleItem + visibleItemCount >= totalItemCount;
+		//boolean loadMore = firstVisibleItem + visibleItemCount >= totalItemCount;
 		
-		if(loadMore && !loading)
-		{
-			loading = true;
-			DownloadWebPageTask task = new DownloadWebPageTask();
-			task.execute(new String[] { Website + "/platforms/" + APIKEY + "&field_list=name,id&offset=" + offset + "&limit=" + limit + "&format=xml" });
-			offset += limit;
-		}
+		//if(loadMore && !loading)
+		//{
+		//	loading = true;
+		//	DownloadWebPageTask task = new DownloadWebPageTask();
+		//	//task.execute(new String[] { Website + "/platforms/" + APIKEY + "&field_list=name,id&offset=" + offset + "&limit=" + limit + "&format=xml" });
+		//	task.execute(new String[] { "http://thegamesdb.net/api/GetPlatformsList.php" });
+		//	offset += limit;
+		//}
 		
 	}
 
